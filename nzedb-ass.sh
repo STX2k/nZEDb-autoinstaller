@@ -6,11 +6,11 @@
 #############################################
 
 # Color definition variables
-YELLOW='\e[33;3m'
-RED='\e[91m'
-BLACK='\033[0m'
-CYAN='\e[96m'
-GREEN='\e[92m'
+YELLOW="\e[33;3m"
+RED="\e[91m"
+BLACK="\033[0m"
+CYAN="\e[96m"
+GREEN="\e[92m"
 
 # Variables
 
@@ -35,7 +35,7 @@ echo -e 'nZEDb Auto Installer by STX2k'
 echo
 
 
-echo -e $RED' You use this Script on your own risk!'$BLACK
+echo -e $RED" You use this Script on your own risk!"$BLACK
 echo
 
 # Function to check if running user is root
@@ -51,7 +51,7 @@ function CHECK_ROOT {
 #User for nZEDb
 echo -e $YELLOW
 echo -e '---> [For safety reasons, we create a separate user...]'$BLACK
-read -p 'User Account Name (eg.'nzedb'):' usernamenzb
+read -p 'User Account Name (eg."nzedb"):' usernamenzb
 sudo useradd -r -s /bin/false $usernamenzb
 sudo usermod -aG www-data $usernamenzb
 echo -e $GREEN
@@ -118,10 +118,10 @@ echo -e 'DONE!'
 # Installing Composer for nZEDb
 echo -e $YELLOW
 echo -e '---> [Install Composer...]'$BLACK
-php -r 'copy('https://getcomposer.org/installer', 'composer-setup.php');' > /dev/null
-php -r 'if (hash_file('SHA384', 'composer-setup.php') === 'e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;' > /dev/null
+php -r 'copy("https://getcomposer.org/installer", "composer-setup.php");' > /dev/null
+php -r 'if (hash_file("SHA384", "composer-setup.php") === "e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae") { echo "Installer verified"; } else { echo "Installer corrupt"; unlink("composer-setup.php"); } echo PHP_EOL;' > /dev/null
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer > /dev/null
-php -r 'unlink('composer-setup.php');' > /dev/null
+php -r 'unlink("composer-setup.php");' > /dev/null
 composer -V
 echo -e $GREEN
 echo -e 'DONE!'
@@ -144,16 +144,16 @@ echo -e 'DONE!'
 # Configure PHP 5.6
 echo -e $YELLOW
 echo -e '---> [Do some magic with the php5.6 config...]'$BLACK
-sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php5/cli/php.ini
-sed -ri 's/(memory_limit =) ([0-9]+)/\1 -1/' /etc/php5/cli/php.ini
-sed -ri 's/(upload_max_filesize =) ([0-9]+)/\1 100/' /etc/php5/cli/php.ini
-sed -ri 's/(post_max_size =) ([0-9]+)/\1 150/' /etc/php5/cli/php.ini
-sed -ri 's/;(date.timezone =)/\1 Europe\/Berlin/' /etc/php5/cli/php.ini
-sed -ri 's/(max_execution_time =) ([0-9]+)/\1 120/' /etc/php5/fpm/php.ini
-sed -ri 's/(memory_limit =) ([0-9]+)/\1 1024/' /etc/php5/fpm/php.ini
-sed -ri 's/(upload_max_filesize =) ([0-9]+)/\1 100/' /etc/php5/fpm/php.ini
-sed -ri 's/(post_max_size =) ([0-9]+)/\1 150/' /etc/php5/fpm/php.ini
-sed -ri 's/;(date.timezone =)/\1 Europe\/Berlin/' /etc/php5/fpm/php.ini
+sed -ri "s/(max_execution_time =) ([0-9]+)/\1 120/" /etc/php5/cli/php.ini
+sed -ri "s/(memory_limit =) ([0-9]+)/\1 -1/" /etc/php5/cli/php.ini
+sed -ri "s/(upload_max_filesize =) ([0-9]+)/\1 100/" /etc/php5/cli/php.ini
+sed -ri "s/(post_max_size =) ([0-9]+)/\1 150/" /etc/php5/cli/php.ini
+sed -ri "s/;(date.timezone =)/\1 Europe\/Berlin/" /etc/php5/cli/php.ini
+sed -ri "s/(max_execution_time =) ([0-9]+)/\1 120/" /etc/php5/fpm/php.ini
+sed -ri "s/(memory_limit =) ([0-9]+)/\1 1024/" /etc/php5/fpm/php.ini
+sed -ri "s/(upload_max_filesize =) ([0-9]+)/\1 100/" /etc/php5/fpm/php.ini
+sed -ri "s/(post_max_size =) ([0-9]+)/\1 150/" /etc/php5/fpm/php.ini
+sed -ri "s/;(date.timezone =)/\1 Europe\/Berlin/" /etc/php5/fpm/php.ini
 echo -e $GREEN
 echo -e 'DONE!'
 
@@ -178,22 +178,22 @@ echo -e 'DONE!'
 
 # Creating MySQl User for nZEDb
 echo -e $YELLOW
-echo -e '---> [Set password for MySQL user 'nzedb'...]'$BLACK
+echo -e '---> [Set password for MySQL user "nzedb"...]'$BLACK
 read -p 'Set password:' passwordmysql
 echo -e $CYAN
-echo -e '---> [Creating MySQL user 'nzedb'...]'$BLACK
+echo -e '---> [Creating MySQL user "nzedb"...]'$BLACK
 echo -e $RED 'Please login with your MySQL Root password!'
 MYSQL=`which mysql`
-Q0='CREATE USER 'nzedb'@'%' IDENTIFIED BY '$passwordmysql';'
-Q1='GRANT ALL ON *.* TO 'nzedb'@'%' IDENTIFIED BY '$passwordmysql';'
-Q2='GRANT FILE ON *.* TO 'nzedb'@'%' IDENTIFIED BY '$passwordmysql';'
+Q0='CREATE USER "nzedb"@"%" IDENTIFIED BY "$passwordmysql";'
+Q1='GRANT ALL ON *.* TO "nzedb"@"%" IDENTIFIED BY "$passwordmysql";'
+Q2='GRANT FILE ON *.* TO "nzedb"@"%" IDENTIFIED BY "$passwordmysql";'
 Q3='FLUSH PRIVILEGES;'
 SQL='${Q0}${Q1}${Q2}${Q3}'
 $MYSQL -uroot -p -e '$SQL'
 echo
 echo -e '-------------------------------------------------'
 echo -e '# WHEN FILLING THE DATABASE INFORMATION IN NZEDB#'
-echo -e '# USE '0.0.0.0' as the hostname!                #'
+echo -e '# USE "0.0.0.0" as the hostname!                #'
 echo -e '#                                               #'
 echo -e '# MySQL User: nzedb                             #'
 echo -e '# MySQL Pass: $passwordmysql                    #'
@@ -210,7 +210,7 @@ echo -e 'DONE!'
 echo -e $YELLOW
 echo -e '---> [Installing Apache 2...]'$BLACK
 sudo apt-get install -y apache2 libapache2-mod-php5.6 > /dev/null
-sudo echo '<VirtualHost *:80>
+sudo echo "<VirtualHost *:80>
     ServerAdmin webmaster@localhost
     ServerName localhost
     DocumentRoot '/var/www/nZEDb/www'
@@ -223,7 +223,7 @@ sudo echo '<VirtualHost *:80>
         Require all granted
     </Directory>
     Alias /covers /var/www/nZEDb/resources/covers
-</VirtualHost>' > nZEDb.conf
+</VirtualHost>" > nZEDb.conf
 sudo mv nZEDb.conf /etc/apache2/sites-available/
 echo -e $CYAN
 read -p 'Set Servername (eg. yourindex.com):' servername
