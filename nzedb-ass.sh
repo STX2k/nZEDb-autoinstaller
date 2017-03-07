@@ -50,8 +50,8 @@ function CHECK_ROOT {
 
 #User for nZEDb
 echo -e $YELLOW
-echo -e "---> [For safety reasons, we create a separate user...]"$BLACK
-read -p "User Account Name (eg.'nzedb'):" usernamenzb
+echo -e "---> [For safety reasons, we create a separate user...]" $BLACK
+read -p 'User Account Name (eg."nzedb"):' usernamenzb
 sudo useradd -r -s /bin/false $usernamenzb
 sudo usermod -aG www-data $usernamenzb
 echo -e $GREEN
@@ -118,10 +118,10 @@ echo -e "DONE!"
 # Installing Composer for nZEDb
 echo -e $YELLOW
 echo -e "---> [Install Composer...]"$BLACK
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" > /dev/null
-php -r "if (hash_file('SHA384', 'composer-setup.php') === 'e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" > /dev/null
+php -r 'copy("https://getcomposer.org/installer", "composer-setup.php");' > /dev/null
+php -r 'if (hash_file("SHA384", "composer-setup.php") === "e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae") { echo "Installer verified"; } else { echo "Installer corrupt"; unlink("composer-setup.php"); } echo PHP_EOL;' > /dev/null
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer > /dev/null
-php -r "unlink('composer-setup.php');" > /dev/null
+php -r 'unlink("composer-setup.php");' > /dev/null
 composer -V
 echo -e $GREEN
 echo -e "DONE!"
